@@ -21,15 +21,21 @@ import javax.jws.WebService;
 public class Services {
 	@WebResult(name = "svg")
 	public InputStream toSvg(@WebParam(name = "string") String text) {
-		QrCode qr = QrCode.encodeText("Hello, world!", QrCode.Ecc.MEDIUM);
+		if (text == null) {
+			return null;
+		}
+		QrCode qr = QrCode.encodeText(text, QrCode.Ecc.MEDIUM);
 		return new ByteArrayInputStream(qr.toSvgString(4).getBytes(Charset.forName("UTF-8")));
 	}
 	@WebResult(name = "image")
 	public InputStream toImage(@WebParam(name = "string") String text, @WebParam(name = "contentType") String contentType) throws IOException {
+		if (text == null) {
+			return null;
+		}
 		if (contentType == null) {
 			contentType = "image/png";
 		}
-		QrCode qr = QrCode.encodeText("Hello, world!", QrCode.Ecc.MEDIUM);
+		QrCode qr = QrCode.encodeText(text, QrCode.Ecc.MEDIUM);
 		BufferedImage image = qr.toImage(4, 10);
 		Iterator<ImageWriter> writers = ImageIO.getImageWritersByMIMEType(contentType);
 		if (!writers.hasNext()) {
