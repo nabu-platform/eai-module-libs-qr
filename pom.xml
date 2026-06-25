@@ -3,7 +3,7 @@
 	<groupId>nabu</groupId>
 	<artifactId>eai-module-libs-qr</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0</version>
+	<version>1.1-SNAPSHOT</version>
 	<name>eai-module-libs-qr</name>
 	<url>http://nabu.be</url>
 	<parent>
